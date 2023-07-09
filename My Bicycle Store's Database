@@ -1,0 +1,22 @@
+CREATE TABLE inventory ( id INTEGER PRIMARY KEY, name TEXT, quantity INTEGER, price INTEGER, sold INTEGER);
+
+INSERT INTO inventory VALUES (1, "Bicycle", 100, 80, 47);
+INSERT INTO inventory VALUES (2, "Rollerblades", 150, 65, 7);
+INSERT INTO inventory VALUES (3, "Skates", 100, 50, 80);
+INSERT INTO inventory VALUES (4, "Helmet", 300, 30, 150);
+INSERT INTO inventory VALUES (5, "Knee Pads", 300, 60, 150);
+INSERT INTO inventory VALUES (6, "Elbow Pads", 300, 60, 200);
+INSERT INTO inventory VALUES (7, "Tires",600, 80, 350); 
+INSERT INTO inventory VALUES (8, "Air Pumps", 750, 10, 400);
+INSERT INTO inventory VALUES (9, "Horns", 180, 15, 75);
+INSERT INTO inventory VALUES (10, "Intertubes", 600, 80, 200);
+INSERT INTO inventory VALUES (11, "Pegs", 500, 60, 420);
+INSERT INTO inventory VALUES (12, "Training wheels", 300, 25, 200);
+INSERT INTO inventory VALUES (13, "Chains",300, 100, 5);
+INSERT INTO inventory VALUES (14, "Basket",150, 15, 80); 
+INSERT INTO inventory VALUES (15, "WD40", 100, 8, 15);
+SELECT Sum(sold) from inventory;
+SELECT * FROM inventory ORDER BY sold;
+SELECT * FROM inventory ORDER BY price;
+
+Check out my store's database. First I created a store's database. I created an inventory list, listing the total number of items sold as well as listing everything by price as well quantity of items sold.
