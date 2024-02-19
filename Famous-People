@@ -1,0 +1,96 @@
+CREATE TABLE celebrities (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    age INTEGER);
+    
+    INSERT INTO celebrities (name, age) VALUES ("Beyoncé", 42);
+INSERT INTO celebrities (name, age) VALUES ("Ciara", 38);
+INSERT INTO celebrities (name, age) VALUES ("Zendaya", 27);
+INSERT INTO celebrities (name, age) VALUES ("Viola Davis", 58);
+INSERT INTO celebrities (name, age) VALUES ("Taraji P. Henson", 53);
+INSERT INTO celebrities (name, age) VALUES ("Gabrielle Union", 51);
+INSERT INTO celebrities (name, age) VALUES ("Regina Hall", 53);
+INSERT INTO celebrities (name, age) VALUES ("Regina King", 53);
+INSERT INTO celebrities (name, age) VALUES ("Whoopi Goldberg", 68);
+INSERT INTO celebrities (name, age) VALUES ("Jennifer Hudson", 42);
+
+CREATE table careers (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    person_id INTEGER,
+    name TEXT);
+    
+INSERT INTO careers (person_id, name) VALUES (1, "singing");
+INSERT INTO careers (person_id, name) VALUES (1, "acting");
+INSERT INTO careers (person_id, name) VALUES (1, "dancing");
+INSERT INTO careers (person_id, name) VALUES (2, "singing");
+INSERT INTO careers (person_id, name) VALUES (2, "dancing");
+INSERT INTO careers (person_id, name) VALUES (2, "acting");
+INSERT INTO careers (person_id, name) VALUES (3, "singing");
+INSERT INTO careers (person_id, name) VALUES (3, "dancing");
+INSERT INTO careers (person_id, name) VALUES (3, "acting");
+INSERT INTO careers (person_id, name) VALUES (4, "acting");
+INSERT INTO careers (person_id, name) VALUES (5, "acting");
+INSERT INTO careers (person_id, name) VALUES (6, "acting");
+INSERT INTO careers (person_id, name) VALUES (7, "acting");
+INSERT INTO careers (person_id, name) VALUES (8, "acting");
+INSERT INTO careers (person_id, name) VALUES (9, "acting");
+INSERT INTO careers (person_id, name) VALUES (9, "daytime tv");
+INSERT INTO careers (person_id, name) VALUES (10, "singing");
+INSERT INTO careers (person_id, name) VALUES (10, "acting");
+INSERT INTO careers (person_id, name) VALUES (10, "daytime tv");
+
+
+
+CREATE table awards(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    person_id INTEGER,
+    emmy INTEGER, grammy INTEGER, oscar INTEGER, tony INTEGER );
+    
+INSERT INTO awards (person_id, emmy, grammy, oscar, tony) VALUES (1, 0,32, 0, 0);
+INSERT INTO awards (person_id, emmy, grammy, oscar, tony) VALUES (2, 0,1,0,0);
+INSERT INTO awards (person_id, emmy, grammy, oscar, tony) VALUES (3, 2, 0, 0, 0);
+INSERT INTO awards (person_id, emmy, grammy, oscar, tony) VALUES (4, 1, 1, 1, 2);
+INSERT INTO awards (person_id, emmy, grammy, oscar, tony) VALUES (5, 0, 0, 0, 0);
+INSERT INTO awards (person_id, emmy, grammy, oscar, tony) VALUES (6, 0, 0, 0, 0);
+INSERT INTO awards (person_id, emmy, grammy, oscar, tony) VALUES (7, 0, 0, 0, 0);
+INSERT INTO awards (person_id, emmy, grammy, oscar, tony) VALUES (8, 4, 0, 0, 0);
+INSERT INTO awards (person_id, emmy, grammy, oscar, tony) VALUES (9, 2, 1, 1, 1);
+INSERT INTO awards (person_id, emmy, grammy, oscar, tony) VALUES ( 10, 1, 2 , 1 ,1);
+
+
+--Analyze which celebrities has what careers--
+
+Select celebrities.name, careers.name
+from celebrities
+join careers
+on celebrities.id=careers.person_id;
+
+--Analyze which celebrities are actors-- 
+
+Select count(name) 
+from careers
+where name="acting";
+
+--Analyze how many awards each celebrity has--
+
+SELECT c.name AS celebrity_name, a.emmy, a.grammy, a.oscar, a.tony, 
+       (a.emmy + a.grammy + a.oscar + a.tony) AS total
+FROM celebrities c
+JOIN awards a ON c.id = a.person_id;
+
+--Analyze how many singers are also actresses--
+
+SELECT c.name AS celebrity_name
+FROM celebrities c
+JOIN careers cr1 ON c.id = cr1.person_id AND cr1.name = 'singing'
+JOIN careers cr2 ON c.id = cr2.person_id AND cr2.name = 'acting';
+
+--Analyze how many of these celebrities has reached EGOT status--
+
+SELECT c.name AS celebrity_name, a.emmy, a.grammy, a.oscar, a.tony
+FROM celebrities c
+JOIN awards a ON c.id = a.person_id
+WHERE a.tony >= 1
+  AND a.grammy >= 1
+  AND a.emmy >= 1
+  AND a.oscar >= 1;
